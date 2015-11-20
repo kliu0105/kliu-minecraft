@@ -1,0 +1,37 @@
+#Obligatory "welcome" message
+#x,y,z core locations
+redcorelocation.x: 85
+redcorelocation.y: 65
+redcorelocation.z: 54
+
+bluecorelocation.x: -63
+bluecorelocation.y: 65
+bluecorelocation.z: 41
+
+redspawn.x: 92
+redspawn.y: 68
+redspawn.z: 63
+
+bluespawn.x: -66
+bluespawn.y: 68
+bluespawn.z: 43
+
+#arrows given on respawn/game start (will eventually differentiate)
+arrowsOnRespawn: 16
+
+#blocks on respawn/game start
+blocksOnRespawn: 16
+
+#"lobby" waiting area (kinda unused for now)
+lobby.x: 1
+lobby.y: 99
+lobby.z: 13
+
+#these are the map corners (for use with WorldEdit to clean out blocks automagitically)
+pos1.x: -84
+pos1.y: 116
+pos1.z: -7
+
+pos2.x: 108
+pos2.y: 69
+pos2.z: 122
