@@ -1,0 +1,10 @@
+name: Original MiniGame
+main: tk.moocrafttowny.original.Main
+version: 1.0.0
+
+commands:
+  start:
+    description: start the game
+  stopgame:
+    description: stop the game
+  
