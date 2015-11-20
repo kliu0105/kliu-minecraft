@@ -1,3 +1,10 @@
+//General idea of the game-
+//Players compete to destroy the other team's "core" (redstone/lapiz block)
+//To get supplies, they must create a "pipeline" to a beacon
+//The pipeline blocks/core are broken by arrows
+//Arrows are the only way to break blocks
+//This isn't even 60% done
+
 package tk.moocrafttowny.original;
 
 import java.util.HashSet;
@@ -270,7 +277,8 @@ public class Main extends JavaPlugin implements Listener {
 					Set<String> entries = team.getEntries();
 					if (teamname == "Blue"){
 						for (String entry:entries){
-							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+entry+" arrow 1");
+							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+entry+" arrow 1");\
+							//eventually I should clean up the console
 							getLogger().info("Gave an arow! w00t");
 							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+ entry + " lapis_block 1");
 							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+ entry + " potato 1");
@@ -289,4 +297,4 @@ public class Main extends JavaPlugin implements Listener {
 		}
 	}
 }
-// OCD line to keep it 280 lines
+// Thanks for reading
