@@ -111,9 +111,12 @@ public class Main extends JavaPlugin implements Listener {
 					hitBlock.setType(Material.AIR);
 					if (hitBlock.getLocation().equals(blueCoreLocation)) {
 						getServer().dispatchCommand(getServer().getConsoleSender(), "say RED WON!");
+						//does this work?
+						getServer().dispatchCommand(getServer().getConsoleSender(), "title title @a RED WON!");
 						stopgame();
 					} else if (hitBlock.getLocation().equals(redCoreLocation)) {
 						getServer().dispatchCommand(getServer().getConsoleSender(), "say BLUE WON!");
+						getServer().dispatchCommand(getServer().getConsoleSender(), "title title @a BLUE WON!");
 						stopgame();
 					}
 					arrow.remove();
@@ -214,9 +217,7 @@ public class Main extends JavaPlugin implements Listener {
 		teamblue.removeEntry(event.getPlayer().getName());
 		teamred.removeEntry(event.getPlayer().getName());
 	}
-
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-		getLogger().info("Got command" + cmd.getName());
+//does this even work...?
 		if (cmd.getName().equalsIgnoreCase("start")){
 			gamestarted = true;
 			for(Player player : Bukkit.getServer().getOnlinePlayers()){
@@ -227,10 +228,32 @@ public class Main extends JavaPlugin implements Listener {
 				getServer().dispatchCommand(sender, "/replace redstone_block air");
 				getServer().dispatchCommand(sender, "/replace glowstone air");
 				getServer().dispatchCommand(getServer().getConsoleSender(), "clear "+player.getName());
-				getServer().dispatchCommand(getServer().getConsoleSender(), "kill "+player.getName());
 				getServer().dispatchCommand(getServer().getConsoleSender(), "say Welcome to the minigame, coded by kliu0105!");
 				getServer().dispatchCommand(getServer().getConsoleSender(), "say Instructions on how to play are on www.moocrafttowny.tk/minigame-rules");
-				getServer().dispatchCommand(getServer().getConsoleSender(), "say Get ready to fight! Destroy the enemy core!");
+				getServer().dispatchCommand(getServer().getConsoleSender(), "say Get ready to fight! Destroy the enemy core!");\
+				//this part specifically
+				ScoreboardManager manager = Bukkit.getScoreboardManager();
+				Scoreboard board = manager.getMainScoreboard();
+				Player player = event.getPlayer();	
+				Team teamblue = board.getTeam("Blue");
+				if (teamblue.hasEntry(player.getName())) {
+					event.setRespawnLocation(new Location(getServer().getWorld("plotworld"), getConfig().getInt("bluespawn.x"), getConfig().getInt("bluespawn.y"), getConfig().getInt("bluespawn.z")));
+					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+						public void run() {
+							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+player.getName()+" lapis_block "+ getConfig().getString("blocksOnStart"));
+							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+player.getName()+" bow 1");
+							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+player.getName()+" arrow "+ getConfig().getString("arrowsOnStart"));
+
+						}
+					}, 60L);
+				} else {
+					event.setRespawnLocation(new Location(getServer().getWorld("plotworld"), getConfig().getInt("redspawn.x"), getConfig().getInt("redspawn.y"), getConfig().getInt("redspawn.z")));
+				}}
+						public void run() {
+							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+player.getName()+" redstone_block "+ getConfig().getString("blocksOnStart"));
+							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+player.getName()+" bow 1");
+							getServer().dispatchCommand(getServer().getConsoleSender(), "give "+player.getName()+" arrow "+ getConfig().getString("arrowsOnStart"));
+
 			}
 		}
 		if (cmd.getName().equalsIgnoreCase("stopgame")){
